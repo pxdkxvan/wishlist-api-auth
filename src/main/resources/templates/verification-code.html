@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:remove="all">Registration confirmation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        body {
+            font-family: calibri, 'DejaVu Sans', Arial, Helvetica, sans-serif;
+        }
+        .verification-code {
+            font-size: 2rem;
+            letter-spacing: 0.3rem;
+            font-family: monospace;
+            font-weight: bold;
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1>Confirm your account</h1>
+<div th:inline="text">Welcome to [[${appName}]] <b th:text="${username}">name</b> !</div>
+<p>
+    Your account has been created on our platform; here is your login information
+    <br/>
+    <br/>
+    Email address : <b th:text="${email}">email</b><br/>
+    <br/>
+    To confirm the validity of your email address, please click on the link below
+</p>
+<p style="text-align: center;">
+    <span class="verification-code" th:text="${key}"></span>
+</p>
+<br>
+<p>
+    Regards, <br/>
+    &emsp; <em th:text="${appName}">appName</em>
+</p>
+</body>
+</html>

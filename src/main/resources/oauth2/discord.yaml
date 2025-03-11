@@ -1,0 +1,20 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          discord:
+            client-id: ${OAUTH2_DISCORD_CLIENT_ID}
+            client-secret: ${OAUTH2_DISCORD_CLIENT_SECRET}
+            client-name: Discord
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/discord
+            scope:
+              - identify
+              - email
+        provider:
+          discord:
+            authorization-uri: https://discordapp.com/api/oauth2/authorize
+            token-uri: https://discordapp.com/api/oauth2/token
+            user-info-uri: https://discordapp.com/api/users/@me
+            user-name-attribute: id

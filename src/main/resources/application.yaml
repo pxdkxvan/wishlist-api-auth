@@ -1,0 +1,79 @@
+server:
+  forward-headers-strategy: native
+#  servlet:
+#    context-path: /api
+
+spring:
+  application:
+    name: TaskManagerApp
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ssXXX
+    time-zone: UTC
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/${JDBC_DATASOURCE_NAME}
+    username: ${JDBC_DATASOURCE_USERNAME}
+    password: ${JDBC_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  output:
+    ansi:
+      enabled: always
+  mail:
+    host: "smtp.gmail.com"
+    port: 587
+    username: ${APP_MAIL_ADDRESS}
+    password: ${APP_MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  config:
+    import:
+      - classpath:oauth2/google.yaml
+      - classpath:oauth2/yandex.yaml
+      - classpath:oauth2/github.yaml
+      - classpath:oauth2/gitlab.yaml
+      - classpath:oauth2/discord.yaml
+
+logging:
+  level:
+    com:
+      pxkdxvan:
+        auth: DEBUG
+#    org:
+#      springframework:
+#        security: DEBUG
+#        web: DEBUG
+#      thymeleaf: DEBUG
+
+app:
+  verification:
+    lifetime: 12h
+    key:
+      code:
+        duration: 10m
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    access:
+      duration: 30m
+    refresh:
+      duration: 3d
+    temporary:
+      duration: ${app.verification.lifetime}
+  cleaner:
+    verification:
+      cron: "0 0 0,8,16 * * ?"
+    account:
+      cron: "0 0 0 * * ?"
+      verification-grace-period: ${app.verification.lifetime}
+  captcha:
+    verify-link: https://www.google.com/recaptcha/api/siteverify
+    key:
+      site: ${CAPTCHA_SITE}
+      secret: ${CAPTCHA_SECRET}
