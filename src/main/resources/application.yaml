@@ -44,7 +44,7 @@ spring:
 logging:
   level:
     com:
-      pxkdxvan:
+      pxdkxvan:
         auth: DEBUG
 #    org:
 #      springframework:
@@ -72,8 +72,3 @@ app:
     account:
       cron: "0 0 0 * * ?"
       verification-grace-period: ${app.verification.lifetime}
-  captcha:
-    verify-link: https://www.google.com/recaptcha/api/siteverify
-    key:
-      site: ${CAPTCHA_SITE}
-      secret: ${CAPTCHA_SECRET}
